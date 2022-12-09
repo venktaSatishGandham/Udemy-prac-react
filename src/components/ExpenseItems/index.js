@@ -3,15 +3,15 @@ import "./index.css";
 
 function ExpenseItems(props) {
   const { amount, date } = props;
-  console.log("expense item");
+
   const [title, setTitle] = useState(props.title);
+
   const year = date.getFullYear();
   const month = date.toLocaleString("en-us", { month: "long" });
   const day = date.toLocaleString("en-us", { day: "2-digit" });
 
   const clickHandler = () => {
     setTitle("satish");
-    console.log("click button");
   };
 
   return (

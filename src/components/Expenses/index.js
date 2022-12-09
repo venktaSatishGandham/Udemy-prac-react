@@ -1,30 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import "./index.css";
 import ExpenseItems from "../ExpenseItems";
+import ExpensesFilter from "../ExpensesFilter";
 
 function Expenses(props) {
+  const [year, setYear] = useState(2022);
+  const updateYear = (yearValue) => {
+    setYear(yearValue);
+  };
+  console.log(year);
   return (
-    <div className="expenses">
-      <ExpenseItems
-        title={props.expenses[0].title}
-        amount={props.expenses[0].amount}
-        date={props.expenses[0].date}
-      />
-      <ExpenseItems
-        title={props.expenses[1].title}
-        amount={props.expenses[1].amount}
-        date={props.expenses[1].date}
-      />
-      <ExpenseItems
-        title={props.expenses[2].title}
-        amount={props.expenses[2].amount}
-        date={props.expenses[2].date}
-      />
-      <ExpenseItems
-        title={props.expenses[3].title}
-        amount={props.expenses[3].amount}
-        date={props.expenses[3].date}
-      />
+    <div>
+      <div className="expenses">
+        <ExpensesFilter updateYear={updateYear} />
+        {props.expenses.map((each) => (
+          <ExpenseItems
+            id={each.id}
+            title={each.title}
+            amount={each.amount}
+            date={each.date}
+          />
+        ))}
+      </div>
     </div>
   );
 }

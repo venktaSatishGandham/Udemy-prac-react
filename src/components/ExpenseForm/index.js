@@ -1,22 +1,47 @@
 import React, { useState } from "react";
 import "./index.css";
 
-export default function ExpenseForm() {
+export default function ExpenseForm(props) {
+  // const [userInput,setUserInput]=useState({
+  //   enteredAmount:"",
+  //   enteredDate:"",
+  //   enteredTitle:""
+  // })
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
   const titleChangeHandler = (e) => {
     setEnteredTitle(e.target.value);
+    //setUserInput({...userInput,enteredTitle:e.target.value})
+    // setUserInput((prevState)=>{
+    //   return{ ...prevState,enteredTitle:e.target.value}
+    // })
   };
 
   const dateChangeHandler = (e) => {
     setEnteredDate(e.target.value);
+    //setUserInput({...userInput,enteredDate:e.target.value})
   };
   const amountChangeHandler = (e) => {
     setEnteredAmount(e.target.value);
+    //setUserInput({...userInput,enteredAmount:e.target.value})
   };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    const expenseData = {
+      title: enteredTitle,
+      amount: enteredAmount,
+      date: new Date(enteredDate),
+    };
+    props.onSaveExpenseData(expenseData);
+    setEnteredAmount("");
+    setEnteredDate("");
+    setEnteredTitle("");
+  };
+
   return (
-    <form>
+    <form onSubmit={submitHandler}>
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label>Title</label>
